@@ -60,19 +60,25 @@ WHERE ws.created_at < '2023-02-02'
   AND ws.utm_campaign = 'nonbrand';
   
 /*
-Alert: At 2.88% CVR, the business is spending on clicks that aren't converting enough to be profitable. 
-This flags a critical need to either reduce CPC bids, improve the landing page, or optimise 
-which audience sees the ads. 
-
-The data creates an immediate business case for action.  
+Alert: 
+	- At 2.88% CVR, the business is spending on clicks that aren't converting enough 
+	  to be profitable. 
+      
+	- This flags a critical need to either reduce CPC bids, improve the landing page, 
+      or optimise which audience sees the ads.  
 */
   
  
   
 /*
-Head of Marketing: Date: February 27, 2023
-"Our brand keyword bidding strategy is different from non-brand. 
-Show me conversion rates split by brand vs non-brand campaigns across all paid channels."
+Date: February 27, 2023
+Subject: Brand vs. nonbrand — are we bidding differently for a reason?
+
+Head of Marketing: 
+	"Our brand keyword bidding strategy is different from non-brand. 
+    
+	Show me conversion rates split by brand vs non-brand campaigns 
+    across all paid channels."
 */
 
 SELECT
@@ -88,10 +94,13 @@ WHERE ws.created_at < '2023-02-27'
 GROUP BY ws.utm_campaign;
   
 /*
-Finding: Brand searchers convert at 5.64% — nearly 2× higher than nonbrand. 
-This validates protecting brand keyword spend. 
-The nonbrand problem is structural: users aren't ready to buy when they arrive. 
-The fix is on the landing page and funnel, not just the bid.
+Finding: 
+	- Brand searchers convert at 5.64% — nearly 2× higher than nonbrand. This 
+      validates protecting brand keyword spend. 
+      
+	- The nonbrand problem is structural: users aren't ready to buy when they arrive. 
+	
+    - The fix is on the landing page and funnel, not just the bid.
 */ 
 
 /*
