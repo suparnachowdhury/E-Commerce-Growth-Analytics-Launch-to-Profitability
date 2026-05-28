@@ -23,3 +23,29 @@ CREATE TABLE website_sessions (
     http_referer          VARCHAR(100),              -- referring domain URL
     PRIMARY KEY (website_session_id)
 );
+
+
+-- ------------------------------------------------------------
+-- TABLE 2: website_pageviews
+-- One row per page viewed. Links to website_sessions
+-- via website_session_id.
+-- ------------------------------------------------------------
+CREATE TABLE website_pageviews (
+    website_pageview_id   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at            DATETIME        NOT NULL,
+    website_session_id    BIGINT UNSIGNED NOT NULL,
+    pageview_url          VARCHAR(50)     NOT NULL,
+    -- Common URLs:
+    --   /home
+    --   /products
+    --   /the-aldgate-picture-frame-set
+    --   /the-camden-pillar-candle-set
+    --   /the-ashford-ceramic-vase
+    --   /the-westbrook-wall-mirror
+    --   /cart
+    --   /shipping
+    --   /billing
+    --   /billing-2
+    --   /thank-you-for-your-order
+    PRIMARY KEY (website_pageview_id)
+);
