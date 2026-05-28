@@ -42,21 +42,15 @@ WHERE ws.created_at < '2023-02-02'
   AND ws.utm_source = 'g_search'
   AND ws.utm_campaign = 'nonbrand';
   
+/*
+Alert: At 2.88% CVR, the business is spending on clicks that aren't converting enough to be profitable. 
+This flags a critical need to either reduce CPC bids, improve the landing page, or optimise 
+which audience sees the ads. 
+
+The data creates an immediate business case for action.  
+*/
   
-  
-  SELECT
-    -- YEAR(created_at) AS yr,
-    -- WEEK(created_at) AS wk,
-    MIN(DATE(created_at)) AS week_start_date,
-    COUNT(website_session_id) AS sessions
-FROM website_sessions
-WHERE created_at < '2023-04-05'
-  AND utm_source = 'g_search'
-  AND utm_campaign = 'nonbrand'
-GROUP BY
-    YEAR(created_at),
-    WEEK(created_at);
-  
+ 
   
 /*
 Head of Marketing: Date: February 15, 2023
