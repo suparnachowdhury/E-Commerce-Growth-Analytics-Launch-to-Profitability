@@ -11,6 +11,9 @@ Head of Marketing: "We launched our website and store three weeks ago.
 
 I want to know where our first customers are actually coming from — break 
 down sessions by traffic source, campaign, and device type so we know what's working.
+
+
+January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 5, 2023
 */
 
 SELECT 
