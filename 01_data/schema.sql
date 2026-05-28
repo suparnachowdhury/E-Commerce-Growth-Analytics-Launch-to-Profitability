@@ -11,3 +11,15 @@
 -- One row per website visit. Tracks traffic source details
 -- and device type for every session.
 -- ------------------------------------------------------------
+CREATE TABLE website_sessions (
+    website_session_id    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at            DATETIME        NOT NULL,
+    user_id               BIGINT UNSIGNED NOT NULL,
+    is_repeat_session     TINYINT(1)      NOT NULL,  -- 0 = new, 1 = returning
+    utm_source            VARCHAR(12),               -- g_search | b_search | snapbook | NULL
+    utm_campaign          VARCHAR(20),               -- nonbrand | brand | pilot | desktop_targeted | NULL
+    utm_content           VARCHAR(30),               -- home_decor_search | urbannest_brand | spring_home_refresh | desktop_home_styling | NULL
+    device_type           VARCHAR(15)     NOT NULL,  -- desktop | mobile
+    http_referer          VARCHAR(100),              -- referring domain URL
+    PRIMARY KEY (website_session_id)
+);
