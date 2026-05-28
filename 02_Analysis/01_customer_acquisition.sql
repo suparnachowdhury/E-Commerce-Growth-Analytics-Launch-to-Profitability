@@ -99,7 +99,12 @@ WHERE w.created_at < '2023-02-28'
 GROUP BY
     w.device_type;
 
-
+/*
+Action taken: Desktop already clears the 3.5% profitability threshold. 
+Mobile at 0.97% is destroying ROI. 
+Recommendation: reduce mobile bids significantly, shift budget to desktop, 
+and investigate the mobile UX separately before scaling back.
+*/
 
 
 
