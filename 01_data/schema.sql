@@ -18,7 +18,7 @@ CREATE TABLE website_sessions (
     is_repeat_session     TINYINT(1)      NOT NULL,  -- 0 = new, 1 = returning
     utm_source            VARCHAR(12),               -- g_search | b_search | snapbook | NULL
     utm_campaign          VARCHAR(20),               -- nonbrand | brand | pilot | desktop_targeted | NULL
-    utm_content           VARCHAR(30),               -- home_decor_search | urbannest_brand | spring_home_refresh | desktop_home_styling | NULL
+    utm_content           VARCHAR(30),               -- homedecor | urbannest_brand | spring_home_refresh | desktop_home_styling | NULL
     device_type           VARCHAR(15)     NOT NULL,  -- desktop | mobile
     http_referer          VARCHAR(100),              -- referring domain URL
     PRIMARY KEY (website_session_id)
@@ -60,9 +60,26 @@ CREATE TABLE orders (
     created_at            DATETIME        NOT NULL,
     website_session_id    BIGINT UNSIGNED NOT NULL,
     user_id               BIGINT UNSIGNED NOT NULL,
-    primary_product_id    SMALLINT UNSIGNED NOT NULL,  -- FK to products.product_id
+    primary_product_id    SMALLINT UNSIGNED NOT NULL,  -- Foreign Key to products.product_id
     items_purchased       SMALLINT UNSIGNED NOT NULL,
     price_usd             DECIMAL(6,2)    NOT NULL,
     cogs_usd              DECIMAL(6,2)    NOT NULL,    -- cost of goods sold
     PRIMARY KEY (order_id)
+);
+
+
+-- ------------------------------------------------------------
+-- TABLE 4: products
+-- One row per product in the UrbanNest catalogue.
+-- ------------------------------------------------------------
+CREATE TABLE products (
+    product_id            SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at            DATETIME          NOT NULL,  -- product launch date
+    product_name          VARCHAR(50)       NOT NULL,
+    -- Products:
+    --   1 | 2023-01-07 | The Aldgate Picture Frame Set  (hero/flagship)
+    --   2 | 2023-10-26 | The Camden Pillar Candle Set
+    --   3 | 2024-09-30 | The Ashford Ceramic Vase
+    --   4 | 2024-11-24 | The Westbrook Wall Mirror
+    PRIMARY KEY (product_id)
 );
