@@ -49,3 +49,20 @@ CREATE TABLE website_pageviews (
     --   /thank-you-for-your-order
     PRIMARY KEY (website_pageview_id)
 );
+
+-- ------------------------------------------------------------
+-- TABLE 3: orders
+-- One row per completed order. Links to website_sessions
+-- via website_session_id.
+-- ------------------------------------------------------------
+CREATE TABLE orders (
+    order_id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at            DATETIME        NOT NULL,
+    website_session_id    BIGINT UNSIGNED NOT NULL,
+    user_id               BIGINT UNSIGNED NOT NULL,
+    primary_product_id    SMALLINT UNSIGNED NOT NULL,  -- FK to products.product_id
+    items_purchased       SMALLINT UNSIGNED NOT NULL,
+    price_usd             DECIMAL(6,2)    NOT NULL,
+    cogs_usd              DECIMAL(6,2)    NOT NULL,    -- cost of goods sold
+    PRIMARY KEY (order_id)
+);
