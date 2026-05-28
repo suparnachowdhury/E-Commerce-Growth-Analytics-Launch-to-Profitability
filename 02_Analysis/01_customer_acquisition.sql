@@ -53,9 +53,9 @@ The data creates an immediate business case for action.
  
   
 /*
-Head of Marketing: Date: February 15, 2023
-Our brand keyword bidding strategy is different from non-brand. 
-Show me conversion rates split by brand vs non-brand campaigns across all paid channels.
+Head of Marketing: Date: February 27, 2023
+"Our brand keyword bidding strategy is different from non-brand. 
+Show me conversion rates split by brand vs non-brand campaigns across all paid channels."
 */
 
 SELECT
@@ -66,12 +66,24 @@ SELECT
 FROM website_sessions ws 
 LEFT JOIN orders o 
 ON ws.website_session_id = o.website_session_id
-WHERE ws.created_at < '2023-02-15'
+WHERE ws.created_at < '2023-02-27'
   AND ws.utm_source IN ('g_search', 'b_search')
 GROUP BY ws.utm_campaign;
   
-select distinct utm_source, utm_campaign from website_sessions;
+/*
+Finding: Brand searchers convert at 5.64% — nearly 2× higher than nonbrand. 
+This validates protecting brand keyword spend. 
+The nonbrand problem is structural: users aren't ready to buy when they arrive. 
+The fix is on the landing page and funnel, not just the bid.
+*/ 
 
+/*
+
+Desktop vs. mobile — where should we focus spend?
+Head of Marketing: Date: February 28, 2023
+"With conversion still below target, we need to know if device type is a factor. 
+Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
+*/
 SELECT
     w.device_type,
     COUNT(DISTINCT w.website_session_id) AS sessions,
@@ -81,7 +93,7 @@ SELECT
 FROM website_sessions w
 LEFT JOIN orders o
     ON w.website_session_id = o.website_session_id
-WHERE w.created_at < '2023-03-11'
+WHERE w.created_at < '2023-02-28'
   AND w.utm_source = 'g_search'
   AND w.utm_campaign = 'nonbrand'
 GROUP BY
