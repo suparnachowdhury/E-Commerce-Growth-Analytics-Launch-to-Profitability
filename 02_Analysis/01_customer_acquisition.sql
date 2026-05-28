@@ -25,6 +25,7 @@ Now that we see paid search is dominant, I need to know whether those clicks are
 Calculate our session-to-order conversion rate by source. 
 We need at least 3.5% to be profitable at our current CPC.
 */
+
 SELECT
 	COUNT(ws.website_session_id) AS sessions,
     COUNT(o.order_id) AS orders,
@@ -32,7 +33,12 @@ SELECT
 FROM website_sessions ws 
 LEFT JOIN orders o 
 ON ws.website_session_id = o.website_session_id
-WHERE ws.created_at < '2023-02-02';
+WHERE ws.created_at < '2023-02-02'
+  AND ws.utm_source = 'g_search'
+  AND ws.utm_campaign = 'nonbrand';
+
+
+
 
 
 
