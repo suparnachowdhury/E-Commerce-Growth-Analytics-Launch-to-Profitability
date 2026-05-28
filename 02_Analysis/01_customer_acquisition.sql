@@ -39,14 +39,24 @@ WHERE ws.created_at < '2023-02-02'
   
   
 /*
-Head of Marketing:
+Head of Marketing: Date: February 15, 2023
 Our brand keyword bidding strategy is different from non-brand. 
 Show me conversion rates split by brand vs non-brand campaigns across all paid channels.
 */
 
-select * from website_sessions
-limit 5;
-
+SELECT
+	ws.utm_campaign,
+    COUNT(ws.website_session_id) AS sessions,
+    COUNT(o.order_id) AS orders,
+    COUNT(o.order_id)* 100.0 /COUNT(ws.website_session_id) AS  session_to_order_conv
+FROM website_sessions ws 
+LEFT JOIN orders o 
+ON ws.website_session_id = o.website_session_id
+WHERE ws.created_at < '2023-02-15'
+  AND ws.utm_source IN ('g_search', 'b_search')
+GROUP BY ws.utm_campaign;
+  
+select distinct utm_source, utm_campaign from website_sessions;
 
 
 
