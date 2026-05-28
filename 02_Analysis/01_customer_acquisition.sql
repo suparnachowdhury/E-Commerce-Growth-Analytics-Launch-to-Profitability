@@ -104,11 +104,13 @@ Finding:
 */ 
 
 /*
+Date: February 28, 2023
+Subject: Desktop vs. mobile — where should we focus spend?
 
-Desktop vs. mobile — where should we focus spend?
-Head of Marketing: Date: February 28, 2023
-"With conversion still below target, we need to know if device type is a factor. 
-Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
+Head of Marketing: 
+	"With conversion still below target, we need to know if device type is a factor. 
+    
+	Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
 */
 SELECT
     w.device_type,
@@ -126,22 +128,27 @@ GROUP BY
     w.device_type;
 
 /*
-Action taken: Desktop already clears the 3.5% profitability threshold. 
-Mobile at 0.97% is destroying ROI. 
-Recommendation: reduce mobile bids significantly, shift budget to desktop, 
-and investigate the mobile UX separately before scaling back.
+Action taken: 
+	- Desktop already clears the 3.5% profitability threshold. 
+	- Mobile at 0.98% is destroying ROI. 
+    
+Recommendation: 
+	- Need to reduce mobile bids significantly, shift budget to desktop, and 
+      investigate the mobile UX separately before scaling back.
 */
 
 /*
+Date: April 17, 2023
+Subject: Did the desktop bid increase actually drive more volume?
 
-Did the desktop bid increase actually drive more volume?
-"After your device-level CVR analysis showed desktop converting at 3.79% vs 
-mobile at 0.97%, we increased bids on g_search nonbrand desktop campaigns on 
-March 7th. 
+Head of Marketing: 
+	"After your device-level CVR analysis showed desktop converting at 3.77% vs 
+	mobile at 0.98%, we increased bids on g_search nonbrand desktop campaigns on 
+	March 7th. 
 
-Pull the weekly desktop and mobile session trends so we can see whether 
-the bid change lifted desktop volume — and confirm mobile is behaving 
-as expected after de-prioritisation."
+	Pull the weekly desktop and mobile session trends so we can see whether 
+	the bid change lifted desktop volume — and confirm mobile is behaving 
+	as expected after de-prioritisation."
 
 Mar 7, 2023 bid change · Analysis window: Feb 5 → Apr 16, 2023
 */
