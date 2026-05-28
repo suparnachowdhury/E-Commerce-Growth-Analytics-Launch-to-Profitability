@@ -1,7 +1,16 @@
+-- =====================================================
+-- Diagnosing our customer acquisition engine
+
+-- Stakeholder: Head of Marketing
+-- ==============================================
 /*
-Head of Marketing: Date: February 1, 2023
-We launched our website and store  three weeks ago and I want to know where our first customers are actually 
-coming from — break down sessions by traffic source, campaign, and device type so we know what's working.
+Date: February 1, 2023
+Subject: Where are our first customers coming from?
+
+Head of Marketing: "We launched our website and store three weeks ago. 
+
+I want to know where our first customers are actually coming from — break 
+down sessions by traffic source, campaign, and device type so we know what's working.
 */
 
 SELECT 
@@ -25,7 +34,9 @@ creating both urgency and opportunity to optimise it.
     
     
 /*
-Head of Marketing: Date: February 2, 2023
+Date: February 2, 2023
+Subject: 
+Head of Marketing: 
 Now that we see paid g_search (nonbrand) is dominant, I need to know whether 
 those clicks are converting into sales. Calculate our session-to-order conversion rate by source. 
 We need at least 3.5% to be profitable at our current CPC.
