@@ -27,19 +27,25 @@ GROUP BY
 ORDER BY 
 	sessions DESC;
     
-/* Finding: g_search (nonbrand) accounts for 98%+ of all sessions. 
-The business is almost entirely dependent on a single paid channel at launch — 
-creating both urgency and opportunity to optimise it.
+/* 
+Finding: 
+	- g_search (nonbrand) accounts for 98%+ of all sessions. 
+	- The business is almost entirely dependent on a single paid channel at launch — creating 
+	  both urgency and opportunity to optimise it.
 */
     
     
 /*
 Date: February 2, 2023
-Subject: 
+Subject: Are paid clicks converting into sales?
+
 Head of Marketing: 
-Now that we see paid g_search (nonbrand) is dominant, I need to know whether 
-those clicks are converting into sales. Calculate our session-to-order conversion rate by source. 
-We need at least 3.5% to be profitable at our current CPC.
+	"Now that we see paid g_search (nonbrand) is dominant, I need to know whether 
+	those clicks are converting into sales. 
+    
+    Calculate our session-to-order conversion rate by source. 
+    
+    We need at least 3.5% to be profitable at our current CPC."
 */
 
 SELECT
