@@ -13,7 +13,7 @@ I want to know where our first customers are actually coming from — break
 down sessions by traffic source, campaign, and device type so we know what's working.
 
 
-January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 5, 2023
+January 7, 2023 Website launch · Analysis window: Jan 7 -> Jan 31, 2023
 */
 
 SELECT 
@@ -49,6 +49,8 @@ Head of Marketing:
     Calculate our session-to-order conversion rate by source. 
     
     We need at least 3.5% to be profitable at our current CPC."
+    
+January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 1, 2023
 */
 
 SELECT
@@ -82,6 +84,8 @@ Head of Marketing:
     
 	Show me conversion rates split by brand vs non-brand campaigns 
     across all paid channels."
+    
+January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 26, 2023
 */
 
 SELECT
@@ -114,6 +118,8 @@ Head of Marketing:
 	"With conversion still below target, we need to know if device type is a factor. 
     
 	Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
+    
+January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 27, 2023
 */
 SELECT
     w.device_type,
