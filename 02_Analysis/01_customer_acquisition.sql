@@ -26,7 +26,9 @@ Calculate our session-to-order conversion rate by source.
 We need at least 3.5% to be profitable at our current CPC.
 */
 SELECT
-* 
+	COUNT(ws.website_session_id) AS sessions,
+    COUNT(o.order_id) AS orders,
+    COUNT(o.order_id)* 100.0 /COUNT(ws.website_session_id) AS  session_to_order_conv
 FROM website_sessions ws 
 LEFT JOIN orders o 
 ON ws.website_session_id = o.website_session_id
