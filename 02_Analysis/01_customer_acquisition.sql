@@ -106,5 +106,42 @@ Recommendation: reduce mobile bids significantly, shift budget to desktop,
 and investigate the mobile UX separately before scaling back.
 */
 
+/*
+"After your device-level CVR analysis showed desktop converting at 3.79% vs 
+mobile at 0.97%, we increased bids on g_search nonbrand desktop campaigns on 
+March 7th. 
+
+Pull the weekly desktop and mobile session trends so we can see whether 
+the bid change lifted desktop volume — and confirm mobile is behaving 
+as expected after de-prioritisation."
+*/
+
+SELECT
+    -- YEAR(created_at),
+    -- WEEK(created_at),
+    MIN(DATE(created_at)) AS week_start_date,
+
+    COUNT(DISTINCT CASE 
+        WHEN device_type = 'desktop' 
+        THEN website_session_id 
+        ELSE NULL 
+    END) AS desktop_sessions,
+
+    COUNT(DISTINCT CASE 
+        WHEN device_type = 'mobile' 
+        THEN website_session_id 
+        ELSE NULL 
+    END) AS mobile_sessions
+
+FROM website_sessions
+WHERE created_at BETWEEN '2023-01-15' AND '2023-06-08'
+  AND utm_source = 'g_search'
+  AND utm_campaign = 'nonbrand'
+
+GROUP BY
+    YEAR(created_at),
+    WEEK(created_at);
+
+
 
 
