@@ -17,6 +17,20 @@ GROUP BY
     device_type
 ORDER BY 
 	sessions DESC;
+    
+    
+/*
+Head of Marketing: Date: February 2, 2023
+Now that we see paid search is dominant, I need to know whether those clicks are converting into sales. 
+Calculate our session-to-order conversion rate by source. 
+We need at least 3.5% to be profitable at our current CPC.
+*/
+SELECT
+* 
+FROM website_sessions ws 
+LEFT JOIN orders o 
+ON ws.website_session_id = o.website_session_id
+WHERE ws.created_at < '2023-02-02';
 
 
 
