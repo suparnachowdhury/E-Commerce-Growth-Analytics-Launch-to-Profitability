@@ -36,6 +36,16 @@ ON ws.website_session_id = o.website_session_id
 WHERE ws.created_at < '2023-02-02'
   AND ws.utm_source = 'g_search'
   AND ws.utm_campaign = 'nonbrand';
+  
+  
+/*
+Head of Marketing:
+Our brand keyword bidding strategy is different from non-brand. 
+Show me conversion rates split by brand vs non-brand campaigns across all paid channels.
+*/
+
+select * from website_sessions
+limit 5;
 
 
 
