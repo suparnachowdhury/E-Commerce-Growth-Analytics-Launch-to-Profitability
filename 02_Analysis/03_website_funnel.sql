@@ -10,10 +10,10 @@ Start with /home-v2 and build the funnel all the way to our thank you page.
 select distinct pageview_url from website_pageviews limit 5;
 select * from website_sessions limit 5;
 
-select 
+SELECT 
 	  ws.website_session_id,
       wp.pageview_url,
-      case when wp.pageview_url = '/products' then 1 else 0 end as product_page,
+      CASE WHEN wp.pageview_url = '/products' then 1 else 0 end as product_page,
       case when wp.pageview_url = '/the-aldgate-picture-frame-set' then 1 else 0 end as picture_frame_page,
       case when wp.pageview_url = '/cart' then 1 else 0 end as cart_page,
       case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
@@ -29,3 +29,13 @@ wp.created_at < '2023-06-14'
 order by ws.website_session_id,
       wp.created_at;
       
+      
+select 
+website_session_id,
+max(product_page) as product_made_it,
+max(picture_frame_page) as picture_frame_made_it,
+max(cart_page) as cart_made_it,
+max(billing_page) as billing_made_it,
+max(shipping_page) as shipping_made_it,
+max(thankyou_page) as thankyou_made_it
+from  (
