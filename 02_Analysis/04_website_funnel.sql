@@ -111,7 +111,7 @@ FROM (
     JOIN website_pageviews wp
         ON ws.website_session_id = wp.website_session_id
     WHERE wp.created_at >= '2023-06-24'
-      AND wp.created_at < '2023-09-10'
+      AND wp.created_at < '2023-09-01'
       AND wp.pageview_url IN (
             '/billing',
             '/billing-2',
