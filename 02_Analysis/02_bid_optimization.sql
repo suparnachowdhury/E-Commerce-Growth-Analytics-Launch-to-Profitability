@@ -75,10 +75,7 @@ Recommendation:
 Date: March 7, 2023
 Subject: Did the desktop bid increase actually drive more volume?
 Head of Marketing:
-	"The nonbrand bid cut on January 27th dropped weekly sessions ~37%
-	(from ~967 to ~611), confirming the expected traffic trade-off.
-	
-    After your device-level CVR analysis (from January 25, 2023) showed desktop 
+	"After your device-level CVR analysis showed desktop 
     converting at 4.23% vs mobile at 0.99%, we increased bids on 
     g_search nonbrand desktop campaigns on March 7th.
     
