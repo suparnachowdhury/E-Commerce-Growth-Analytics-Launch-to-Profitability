@@ -102,5 +102,5 @@ from website_sessions ws
 join website_pageviews wp
 on ws.website_session_id = wp.website_session_id
 where  wp.created_at  >= '2023-06-24'
-and wp.created_at < '2012-11-10'
+and wp.created_at < '2023-09-10'
 and wp.pageview_url in ('/home-v2','/billing','/billing-2','/thank-you-for-your-order') ;
