@@ -11,7 +11,7 @@ Head of Marketing:
 	Pull weekly session volume since launch so we can see if cutting bids hurt our traffic,
 	and by how much."
 
-Jan 27, 2023 bid change · Analysis window: Jan 1 → Feb 23, 2023
+Jan 27, 2023 g_search non-brand campaign bid reduce · Analysis window: Jan 1 → Feb 23, 2023
 */
 
 SELECT
@@ -25,7 +25,16 @@ GROUP BY
     YEAR(created_at),
     WEEK(created_at);
 
-
+/*
+Finding:
+	- Cutting nonbrand bids on January 27th caused an immediate ~37% drop in weekly 
+      sessions (967 → 611), and traffic did not recover over the following three weeks. 
+      
+	- The volume loss is real and persistent, but this was an expected trade-off — 
+       the prior CVR analysis showed nonbrand was converting poorly, so the lost sessions 
+       were low-quality. 
+	
+*/
 
 
 /*
@@ -43,7 +52,7 @@ Head of Marketing:
 	the bid change lifted desktop volume — and confirm mobile is behaving
 	as expected after de-prioritisation."
 
-Mar 7, 2023 bid change · Analysis window: Feb 5 → Apr 16, 2023
+Mar 7, 2023 g_search nonbrand desktop bid increase · Analysis window: Feb 5 → Apr 15, 2023
 */
 
 SELECT
@@ -53,7 +62,7 @@ SELECT
     COUNT(DISTINCT CASE WHEN device_type = 'mobile'
         THEN website_session_id END)                                   AS mobile_sessions
 FROM   website_sessions
-WHERE  created_at  < '2023-04-17'           -- analysis window: Feb 5 → Apr 16, 2023
+WHERE  created_at  < '2023-04-16'           -- analysis window: Feb 5 → Apr 16, 2023
   AND  created_at >= '2023-02-05'
   AND  utm_source   = 'g_search'
   AND  utm_campaign = 'nonbrand'
