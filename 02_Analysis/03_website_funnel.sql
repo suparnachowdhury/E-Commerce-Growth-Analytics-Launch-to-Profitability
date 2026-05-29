@@ -95,32 +95,60 @@ WHERE pageview_url = '/home-v2';
 # first_created_at: 2023-04-02 00:35:54, 
 # first_pv: 23504
 
-CREATE TEMPORARY TABLE bounced_session_id AS
-SELECT
-	website_session_id
-FROM website_pageviews
-WHERE website_pageview_id >= 23504
-AND created_at < '2023-05-02'
-GROUP BY website_session_id
-HAVING COUNT(*) = 1;
-
-SELECT
-	pv.pageview_url,
-	COUNT(pv.website_session_id) AS sessions,
-    COUNT(bs.website_session_id) AS bounced_sessions,
-    COUNT(bs.website_session_id)* 100.0 / COUNT(pv.website_session_id) AS bounce_rate
+-- Step 1: Define test sessions
+CREATE TEMPORARY TABLE test_sessions AS
+SELECT 
+    website_session_id,
+    created_at,
+    utm_source,
+    utm_campaign
+FROM website_sessions
+WHERE created_at >= '2023-04-02'
+  AND created_at < '2023-05-15'
+  AND utm_source = 'gsearch'
+  AND utm_campaign = 'nonbrand';
+  
+-- Step 2: Identify landing page per session
+CREATE TEMPORARY TABLE session_landing AS
+SELECT 
+    pv.website_session_id,
+    pv.pageview_url AS landing_page
 FROM website_pageviews pv
-LEFT JOIN bounced_session_id bs
-ON bs.website_session_id = pv.website_session_id
-WHERE pv.website_pageview_id >= 23504
-AND pv.created_at < '2023-05-15'
-AND pv.pageview_url IN ('/home', '/home-v2')
-GROUP BY 
-	pv.pageview_url
+INNER JOIN test_sessions ts
+    ON pv.website_session_id = ts.website_session_id
+INNER JOIN (
+    SELECT 
+        website_session_id,
+        MIN(website_pageview_id) AS first_pv_id
+    FROM website_pageviews
+    GROUP BY website_session_id
+) fp
+    ON pv.website_session_id = fp.website_session_id
+   AND pv.website_pageview_id = fp.first_pv_id;
+CREATE TEMPORARY TABLE session_counts AS
+SELECT
+    website_session_id,
+    COUNT(*) AS pageviews
+FROM website_pageviews
+GROUP BY website_session_id;
 
-====
 
+CREATE TEMPORARY TABLE bounced_sessions AS
+SELECT 
+    website_session_id
+FROM session_counts
+WHERE pageviews = 1;
 
+SELECT
+    sl.landing_page,
+    COUNT(*) AS sessions,
+    SUM(CASE WHEN bs.website_session_id IS NOT NULL THEN 1 ELSE 0 END) AS bounced_sessions,
+    SUM(CASE WHEN bs.website_session_id IS NOT NULL THEN 1 ELSE 0 END) * 1.0
+        / COUNT(*) AS bounce_rate
+FROM session_landing sl
+LEFT JOIN bounced_sessions bs
+    ON sl.website_session_id = bs.website_session_id
+GROUP BY sl.landing_page;
 /*
 Build a full conversion funnel from /lander-1 through to the thank-you page using data from August 5th onward. I want to see where we're losing people at each step so we know what to fix next.
 */
