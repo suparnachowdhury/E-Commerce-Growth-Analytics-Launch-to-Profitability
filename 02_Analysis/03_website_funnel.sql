@@ -95,7 +95,30 @@ WHERE pageview_url = '/home-v2';
 # first_created_at: 2023-04-02 00:35:54, 
 # first_pv: 23504
 
+CREATE TEMPORARY TABLE bounced_session_id AS
+SELECT
+	website_session_id
+FROM website_pageviews
+WHERE website_pageview_id >= 23504
+AND created_at < '2023-05-02'
+GROUP BY website_session_id
+HAVING COUNT(*) = 1;
 
+SELECT
+	pv.pageview_url,
+	COUNT(pv.website_session_id) AS sessions,
+    COUNT(bs.website_session_id) AS bounced_sessions,
+    COUNT(bs.website_session_id)* 100.0 / COUNT(pv.website_session_id) AS bounce_rate
+FROM website_pageviews pv
+LEFT JOIN bounced_session_id bs
+ON bs.website_session_id = pv.website_session_id
+WHERE pv.website_pageview_id >= 23504
+AND pv.created_at < '2023-05-15'
+AND pv.pageview_url IN ('/home', '/home-v2')
+GROUP BY 
+	pv.pageview_url
+
+====
 
 
 /*
