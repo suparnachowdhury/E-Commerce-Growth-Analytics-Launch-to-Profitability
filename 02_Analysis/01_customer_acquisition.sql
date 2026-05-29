@@ -5,16 +5,16 @@
 -- =====================================================================================
 /*
 
-Date: February 1, 2023
+Date: January 24, 2023
 Subject: Where are our first customers coming from?
 
-Head of Marketing: "We launched our website and store a month ago. 
+Head of Marketing: "We launched our website and store three weeks ago. 
 
 I want to know where our first customers are actually coming from — break 
 down sessions by traffic source, campaign, and device type so we know what's working.
 
 
-January 1, 2023 Website launch · Analysis window: Jan 1 -> Jan 31, 2023
+January 1, 2023 Website launch · Analysis window: Jan 1 -> Jan 23, 2023
 */
 
 SELECT 
@@ -23,7 +23,7 @@ SELECT
     device_type,
     COUNT(website_session_id) AS sessions
 FROM website_sessions
-WHERE created_at < '2023-02-01'
+WHERE created_at < '2023-01-24'
 GROUP BY 
 	utm_source,
     utm_campaign,
@@ -67,7 +67,7 @@ WHERE ws.created_at < '2023-02-02'
   
 /*
 Alert: 
-	- At 2.88% CVR, the business is spending on clicks that aren't converting enough 
+	- At 2.86% CVR, the business is spending on clicks that aren't converting enough 
 	  to be profitable. 
       
 	- This flags a critical need to either reduce CPC bids, improve the landing page, 
