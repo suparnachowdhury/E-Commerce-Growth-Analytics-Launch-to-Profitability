@@ -75,3 +75,19 @@ select
   count(distinct case when billing_made_it = 1 then website_session_id else null end)
  as billing_click_rate
 from session_level_made_it_flags;
+
+
+
+/*
+ANALYZING CONVERSION FUNNEL TEST
+Website Manager: 
+We tested an updated billing page based on your funnel analysis. 
+Can you take a look and see whether /billing-2 is doing any better than the original /billing page?
+
+We’re wondering what % of sessions on those pages end up placing an order. 
+FYI – we ran this test for all traffic, not just for our search visitors.
+*/
+select min(website_pageview_id) as first_pv_id 
+from website_pageviews
+where pageview_url= '/billing-2';
+-- first_pv_id: 53550
