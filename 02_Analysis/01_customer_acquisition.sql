@@ -112,15 +112,14 @@ Finding:
 */ 
 
 /*
-Date: February 28, 2023
+Date: January 25, 2023
 Subject: Desktop vs. mobile — where should we focus spend?
 
 Head of Marketing: 
-	"With conversion still below target, we need to know if device type is a factor. 
-    
+	"With conversion still below target, we need to know if device type is a factor.     
 	Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
     
-January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 27, 2023
+January 1, 2023 Website launch · Analysis window: Jan 7 -> Jan 24, 2023
 */
 SELECT
     w.device_type,
@@ -131,7 +130,7 @@ SELECT
 FROM website_sessions w
 LEFT JOIN orders o
     ON w.website_session_id = o.website_session_id
-WHERE w.created_at < '2023-02-28'
+WHERE w.created_at < '2023-01-25'
   AND w.utm_source = 'g_search'
   AND w.utm_campaign = 'nonbrand'
 GROUP BY
@@ -140,7 +139,7 @@ GROUP BY
 /*
 Action taken: 
 	- Desktop already clears the 3.5% profitability threshold. 
-	- Mobile at 0.98% is destroying ROI. 
+	- Mobile at 0.99% is destroying ROI. 
     
 Recommendation: 
 	- Need to reduce mobile bids significantly, shift budget to desktop, and 
@@ -148,12 +147,12 @@ Recommendation:
 */
 
 /*
-Date: April 17, 2023
+Date: January 26, 2023
 Subject: Did the desktop bid increase actually drive more volume?
 
 Head of Marketing: 
-	"After your device-level CVR analysis showed desktop converting at 3.77% vs 
-	mobile at 0.98%, we increased bids on g_search nonbrand desktop campaigns on 
+	"After your device-level CVR analysis showed desktop converting at 4.23% vs 
+	mobile at 0.99%, we increased bids on g_search nonbrand desktop campaigns on 
 	March 7th. 
 
 	Pull the weekly desktop and mobile session trends so we can see whether 
