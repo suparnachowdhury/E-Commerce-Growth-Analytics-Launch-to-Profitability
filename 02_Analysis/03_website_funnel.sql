@@ -57,7 +57,25 @@ New Website Manager:
     Pull the bounce rate for that page — I want sessions, bounced sessions, 
     and bounce rate % so we can see if it's doing its job."
 */
+CREATE TEMPORARY TABLE bounced_sessions AS
+SELECT 
+    website_session_id
+FROM website_pageviews
+WHERE created_at < '2023-03-21'
+GROUP BY website_session_id
+HAVING COUNT(*) = 1;
 
+
+SELECT
+    COUNT(DISTINCT pv.website_session_id) AS sessions,
+    COUNT(DISTINCT bs.website_session_id) AS bounced_sessions,
+    COUNT(DISTINCT bs.website_session_id) * 1.0 
+        / COUNT(DISTINCT pv.website_session_id) AS bounce_rate
+FROM website_pageviews pv
+LEFT JOIN bounced_sessions bs
+    ON pv.website_session_id = bs.website_session_id
+WHERE pv.created_at < '2023-03-21'
+AND pv.pageview_url = '/home';
 
 /*
 We A/B tested a new landing page (/lander-1) against /home for paid non-brand traffic. Compare bounce rates for both groups during the test window to see which page performed better.
