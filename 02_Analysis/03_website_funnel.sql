@@ -1,0 +1,31 @@
+/*
+BUILDING CONVERSION FUNNEL
+Website Manager: I’d like to understand where we lose our search visitors between the new /home-v2 
+page and placing an order. 
+Can you build us a full conversion funnel, analyzing how many customers make it to each step?
+Start with /home-v2 and build the funnel all the way to our thank you page.
+ Please use data since May 14th.
+
+*/
+select distinct pageview_url from website_pageviews limit 5;
+select * from website_sessions limit 5;
+
+select 
+	  ws.website_session_id,
+      wp.pageview_url,
+      case when wp.pageview_url = '/products' then 1 else 0 end as product_page,
+      case when wp.pageview_url = '/the-aldgate-picture-frame-set' then 1 else 0 end as picture_frame_page,
+      case when wp.pageview_url = '/cart' then 1 else 0 end as cart_page,
+      case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
+      case when wp.pageview_url = '/shipping' then 1 else 0 end as shipping_page,
+      case when wp.pageview_url = '/thank-you-for-your-order' then 1 else 0 end as thankyou_page
+from website_sessions ws
+join website_pageviews wp
+on ws.website_session_id = wp.website_session_id
+where  ws.utm_source = 'g_search'
+and ws.utm_campaign = 'nonbrand'
+and wp.created_at > '2023-05-14' and 
+wp.created_at < '2023-06-14' 
+order by ws.website_session_id,
+      wp.created_at;
+      
