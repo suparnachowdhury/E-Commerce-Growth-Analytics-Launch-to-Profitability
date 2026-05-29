@@ -183,8 +183,8 @@ SELECT   DISTINCT utm_content FROM website_sessions LIMIT 5;
 FROM website_pageviews pv
 INNER JOIN website_sessions ws 
 ON pv.website_session_id = ws.website_session_id
-WHERE pv.created_at >= '2012-06-01'
-AND pv.created_at <'2012-08-31'
+WHERE pv.created_at >= '2023-04-01'
+AND pv.created_at <'2023-06-15'
 AND ws.utm_campaign = 'nonbrand'
 AND ws.utm_source = 'gsearch'
 GROUP BY
