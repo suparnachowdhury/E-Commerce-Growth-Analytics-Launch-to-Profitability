@@ -77,7 +77,7 @@ Alert:
  
   
 /*
-Date: February 27, 2023
+Date: January 25, 2023
 Subject: Brand vs. nonbrand — are we bidding differently for a reason?
 
 Head of Marketing: 
@@ -86,7 +86,7 @@ Head of Marketing:
 	Show me conversion rates split by brand vs non-brand campaigns 
     across all paid channels."
     
-January 7, 2023 Website launch · Analysis window: Jan 7 -> Feb 26, 2023
+January 1, 2023 Website launch · Analysis window: Jan 7 -> Jan 24, 2023
 */
 
 SELECT
@@ -97,13 +97,13 @@ SELECT
 FROM website_sessions ws 
 LEFT JOIN orders o 
 ON ws.website_session_id = o.website_session_id
-WHERE ws.created_at < '2023-02-27'
+WHERE ws.created_at < '2023-01-25'
   AND ws.utm_source IN ('g_search', 'b_search')
 GROUP BY ws.utm_campaign;
   
 /*
 Finding: 
-	- Brand searchers convert at 5.64% — nearly 2× higher than nonbrand. This 
+	- Brand searchers convert at 6.08% — more than 2× higher than nonbrand. This 
       validates protecting brand keyword spend. 
       
 	- The nonbrand problem is structural: users aren't ready to buy when they arrive. 
@@ -144,42 +144,4 @@ Action taken:
 Recommendation: 
 	- Need to reduce mobile bids significantly, shift budget to desktop, and 
       investigate the mobile UX separately before scaling back.
-*/
-
-/*
-Date: January 26, 2023
-Subject: Did the desktop bid increase actually drive more volume?
-
-Head of Marketing: 
-	"After your device-level CVR analysis showed desktop converting at 4.23% vs 
-	mobile at 0.99%, we increased bids on g_search nonbrand desktop campaigns on 
-	March 7th. 
-
-	Pull the weekly desktop and mobile session trends so we can see whether 
-	the bid change lifted desktop volume — and confirm mobile is behaving 
-	as expected after de-prioritisation."
-
-Mar 7, 2023 bid change · Analysis window: Feb 5 → Apr 16, 2023
-*/
-
-SELECT
-    MIN(DATE(created_at)) AS week_start_date,
-    COUNT(DISTINCT CASE WHEN device_type = 'desktop'
-        THEN website_session_id END) AS desktop_sessions,
-    COUNT(DISTINCT CASE WHEN device_type = 'mobile'
-        THEN website_session_id END) AS mobile_sessions
-FROM   website_sessions
-WHERE  created_at BETWEEN '2023-02-05' AND '2023-04-19'
-  AND  utm_source   = 'g_search'
-  AND  utm_campaign = 'nonbrand'
-GROUP BY  YEAR(created_at), WEEK(created_at)
-ORDER BY  week_start_date;
-
-/*
-Bid increase confirmed effective: 
-Desktop sessions rose from a pre-bid average of ~427/week to ~634/week post-bid — 
-a +48% lift that held consistently for 6 straight weeks. 
-
-Mobile declined from ~249 to ~185/week (−26%), consistent with de-prioritisation. 
-The device-level strategy is working exactly as intended.
 */

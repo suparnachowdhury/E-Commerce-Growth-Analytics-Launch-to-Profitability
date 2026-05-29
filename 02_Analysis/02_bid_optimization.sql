@@ -5,14 +5,16 @@
 -- =====================================================================================
 
 /*
-Date: February 1, 2023
-Subject: Where are our first customers coming from?
+Date: February 24, 2023
+Subject: Cutting bid affects sessions?
 
 Head of Marketing:
-Based on the CVR analysis, we cut bids on our primary non-brand campaign on April 15th. 
+	"Based on the CVR analysis, we cut bids on our primary non-brand campaign on January 27th. 
 
-Pull weekly session volume since launch so we can see if cutting bids hurt our traffic, 
-and by how much.
+	Pull weekly session volume since launch so we can see if cutting bids hurt our traffic, 
+	and by how much."
+    
+Jan 27, 2023 bid change · Analysis window: Jan 1 → Feb 23, 2023
 */
 
 SELECT
@@ -21,7 +23,7 @@ SELECT
     MIN(DATE(created_at)) AS week_start_date,
     COUNT(website_session_id) AS sessions
 FROM website_sessions
-WHERE created_at BETWEEN '2023-01-05' AND '2023-05-19'
+WHERE created_at < '2023-02-24' 
   AND utm_source = 'g_search'
   AND utm_campaign = 'nonbrand'
 GROUP BY
