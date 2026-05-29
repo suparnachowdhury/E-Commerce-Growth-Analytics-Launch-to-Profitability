@@ -29,7 +29,7 @@ wp.created_at < '2023-06-14'
 order by ws.website_session_id,
       wp.created_at;
       
-      
+create temporary table session_level_made_it_flags AS      
 select 
 website_session_id,
 max(product_page) as product_made_it,
@@ -39,3 +39,22 @@ max(billing_page) as billing_made_it,
 max(shipping_page) as shipping_made_it,
 max(thankyou_page) as thankyou_made_it
 from  (
+	SELECT 
+	  ws.website_session_id,
+      wp.pageview_url,
+      CASE WHEN wp.pageview_url = '/products' then 1 else 0 end as product_page,
+      case when wp.pageview_url = '/the-aldgate-picture-frame-set' then 1 else 0 end as picture_frame_page,
+      case when wp.pageview_url = '/cart' then 1 else 0 end as cart_page,
+      case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
+      case when wp.pageview_url = '/shipping' then 1 else 0 end as shipping_page,
+      case when wp.pageview_url = '/thank-you-for-your-order' then 1 else 0 end as thankyou_page
+from website_sessions ws
+join website_pageviews wp
+on ws.website_session_id = wp.website_session_id
+where  ws.utm_source = 'g_search'
+and ws.utm_campaign = 'nonbrand'
+and wp.created_at > '2023-05-14' and 
+wp.created_at < '2023-06-14' 
+order by ws.website_session_id,
+      wp.created_at) as pageview_level
+group by website_session_id;
