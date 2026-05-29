@@ -91,3 +91,16 @@ select min(created_at) as first_created_at
 from website_pageviews
 where pageview_url= '/billing-2';
 -- first_created_at: '2023-06-24 00:13:05'
+
+select 
+	  ws.website_session_id,
+      wp.pageview_url,
+      case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
+      case when wp.pageview_url = '/billing-2' then 1 else 0 end as shipping_page,
+      case when wp.pageview_url = '/thank-you-for-your-order' then 1 else 0 end as thankyou_page
+from website_sessions ws
+join website_pageviews wp
+on ws.website_session_id = wp.website_session_id
+where  wp.created_at  >= '2023-06-24'
+and wp.created_at < '2012-11-10'
+and wp.pageview_url in ('/home-v2','/billing','/billing-2','/thank-you-for-your-order') ;
