@@ -1,5 +1,5 @@
 /*
-Date: April 20, 2023
+Date: March 20, 2023
 Subject: 
 New Website Manager: 
 	"I'm new to this site and need to understand how people move through it. 
@@ -13,12 +13,13 @@ SELECT
 	pageview_url,
     COUNT(website_pageview_id) AS sessions
 FROM website_pageviews
-WHERE created_at < '2023-04-20'
+WHERE created_at < '2023-03-20'
 GROUP BY pageview_url
 ORDER BY sessions DESC;
 
 /*
-FINDING TOP ENTRY PAGES
+Date: March 20, 2023
+Subject: Finding top entry pages
 New Website Manager: 
 Would you be able to pull a list of the top entry pages? I want to confirm 
 where our users are hitting the site.
@@ -31,7 +32,7 @@ SELECT
 		website_session_id,
         MIN(website_pageview_id) as first_pv
 FROM website_pageviews
-WHERE created_at < '2012-04-21'
+WHERE created_at < '2023-04-21'
 GROUP BY 
 		website_session_id;
         
@@ -44,6 +45,9 @@ LEFT JOIN website_pageviews  pv
 ON fs.first_pv = pv.website_pageview_id
 GROUP BY
 		pv.pageview_url;
+        
+SELECT MIN(created_at) FROM website_pageviews
+WHERE pageview_url = '/lander-1'
 
 /*
 Date: April 21, 2023
