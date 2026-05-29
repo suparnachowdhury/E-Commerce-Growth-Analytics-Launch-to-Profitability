@@ -87,7 +87,7 @@ Can you take a look and see whether /billing-2 is doing any better than the orig
 We’re wondering what % of sessions on those pages end up placing an order. 
 FYI – we ran this test for all traffic, not just for our search visitors.
 */
-select min(website_pageview_id) as first_pv_id 
+select min(created_at) as first_created_at
 from website_pageviews
 where pageview_url= '/billing-2';
--- first_pv_id: 53550
+-- first_created_at: '2023-06-24 00:13:05'
