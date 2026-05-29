@@ -92,6 +92,14 @@ from website_pageviews
 where pageview_url= '/billing-2';
 -- first_created_at: '2023-06-24 00:13:05'
 
+
+
+select 
+website_session_id,
+max(billing_page) as billing_made_it,
+max(billing1_page) as billing1_made_it,
+max(thankyou_page) as thankyou_made_it
+from (
 select 
 	  ws.website_session_id,
       wp.pageview_url,
