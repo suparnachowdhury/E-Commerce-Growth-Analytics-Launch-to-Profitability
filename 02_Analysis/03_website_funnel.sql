@@ -102,15 +102,15 @@ WHERE pageview_url = '/home-v2';
 -- STEP 1: Filter test sessions
 CREATE TEMPORARY TABLE test_sessions AS
 SELECT 
-    website_session_id,
+    website_session_id,utm_source,utm_campaign
     created_at
 FROM website_sessions
 WHERE created_at >= '2023-04-02'
   AND created_at < '2023-05-15'
-  AND utm_source = 'gsearch'
+  AND utm_source = 'g_search'
   AND utm_campaign = 'nonbrand';
 
-
+-- select * from test_sessions;
 -- STEP 2: Identify landing page per session (first pageview)
 CREATE TEMPORARY TABLE session_landing AS
 SELECT
