@@ -32,7 +32,7 @@ SELECT
 		website_session_id,
         MIN(website_pageview_id) as first_pv
 FROM website_pageviews
-WHERE created_at < '2023-04-21'
+WHERE created_at < '2023-03-20'
 GROUP BY 
 		website_session_id;
         
@@ -46,14 +46,13 @@ ON fs.first_pv = pv.website_pageview_id
 GROUP BY
 		pv.pageview_url;
         
-SELECT MIN(created_at) FROM website_pageviews
-WHERE pageview_url = '/lander-1'
+
 
 /*
 Date: April 21, 2023
 Subject: 
 New Website Manager: 
-	"Almost all paid traffic lands on /home. 
+	"Almost all traffic lands on /home. 
     
     Pull the bounce rate for that page — I want sessions, bounced sessions, 
     and bounce rate % so we can see if it's doing its job."
@@ -61,7 +60,7 @@ New Website Manager:
 SELECT
 	*
 FROM website_pageviews
-WHERE created_at < '2023-04-21'
+WHERE created_at < '2023-03-21'
 
 
 /*
