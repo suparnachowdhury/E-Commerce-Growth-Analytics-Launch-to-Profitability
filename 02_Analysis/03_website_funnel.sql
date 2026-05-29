@@ -81,10 +81,19 @@ AND pv.pageview_url = '/home';
 Date: April 21, 2023
 Subject: 
 Website Manager: 
-	"We A/B tested a new landing page (/home-v3) against /home for paid non-brand traffic. 
+	"We A/B tested a new landing page (/home-v2) against /home for paid non-brand traffic. 
 
 	Compare bounce rates for both groups during the test window to see which page performed better."
 */
+
+SELECT
+	MIN(created_at) AS first_created_at,
+    MIN(website_pageview_id) AS first_pv
+FROM website_pageviews
+WHERE pageview_url = '/home-v2';
+
+# first_created_at: 2023-04-02 00:35:54, 
+# first_pv: 23504
 
 
 
