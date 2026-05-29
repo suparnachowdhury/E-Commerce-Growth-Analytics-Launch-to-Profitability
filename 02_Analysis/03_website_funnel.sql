@@ -57,12 +57,12 @@ New Website Manager:
     Pull the bounce rate for that page — I want sessions, bounced sessions, 
     and bounce rate % so we can see if it's doing its job."
 */
-CREATE TEMPORARY TABLE first_pv_per_session
+CREATE drop TEMPORARY TABLE first_pv_per_session
 SELECT 
 		website_session_id,
         MIN(website_pageview_id) as first_pv
 FROM website_pageviews
-WHERE created_at < '2012-06-14'
+WHERE created_at < '2023-03-21'
 GROUP BY 
 		website_session_id;
         
