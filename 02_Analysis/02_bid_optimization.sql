@@ -35,6 +35,40 @@ Finding:
        were low-quality. 
 	
 */
+/*
+Date: February 24, 2023
+Subject: Desktop vs. mobile — where should we focus spend?
+
+Head of Marketing: 
+	"With conversion still below target, we need to know if device type is a factor.     
+	Show me CVR by device for g_search nonbrand so we can make a bid adjustment decision."
+    
+Jan 27, 2023 g_search non-brand campaign bid reduce · Analysis window: Jan 1 → Feb 23, 2023
+*/
+SELECT
+    w.device_type,
+    COUNT(DISTINCT w.website_session_id) AS sessions,
+    COUNT(DISTINCT o.website_session_id) AS orders,
+    COUNT(DISTINCT o.website_session_id) * 100.0
+        / COUNT(DISTINCT w.website_session_id) AS session_to_order_conv_ratio
+FROM website_sessions w
+LEFT JOIN orders o
+    ON w.website_session_id = o.website_session_id
+WHERE w.created_at < '2023-02-24'
+  AND w.utm_source = 'g_search'
+  AND w.utm_campaign = 'nonbrand'
+GROUP BY
+    w.device_type;
+
+/*
+Action taken: 
+	- Desktop already clears the 3.5% profitability threshold. 
+	- Mobile at 0.99% is destroying ROI. 
+    
+Recommendation: 
+	- Need to reduce mobile bids significantly, shift budget to desktop, and 
+      investigate the mobile UX separately before scaling back.
+*/
 
 
 /*
