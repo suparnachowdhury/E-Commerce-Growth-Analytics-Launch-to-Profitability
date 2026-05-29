@@ -94,23 +94,30 @@ where pageview_url= '/billing-2';
 
 
 
-select 
-website_session_id,
-max(billing_page) as billing_made_it,
-max(billing2_page) as billing2_made_it,
-max(thankyou_page) as thankyou_made_it
-from (
-select 
-	  ws.website_session_id,
-      wp.pageview_url,
-      case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
-      case when wp.pageview_url = '/billing-2' then 1 else 0 end as billing2_page,
-      case when wp.pageview_url = '/thank-you-for-your-order' then 1 else 0 end as thankyou_page
-from website_sessions ws
-join website_pageviews wp
-on ws.website_session_id = wp.website_session_id
-where  wp.created_at  >= '2023-06-24'
-and wp.created_at < '2023-09-10'
-and wp.pageview_url in ('/home-v2','/billing','/billing-2','/thank-you-for-your-order')
-) as pageview_level
-group by website_session_id;
+CREATE TEMPORARY TABLE billing_test_sessions AS
+SELECT 
+    website_session_id,
+    MAX(billing_page) AS billing_made_it,
+    MAX(billing2_page) AS billing2_made_it,
+    MAX(thankyou_page) AS thankyou_made_it
+FROM (
+    SELECT 
+        ws.website_session_id,
+        wp.pageview_url,
+        CASE WHEN wp.pageview_url = '/billing' THEN 1 ELSE 0 END AS billing_page,
+        CASE WHEN wp.pageview_url = '/billing-2' THEN 1 ELSE 0 END AS billing2_page,
+        CASE WHEN wp.pageview_url = '/thank-you-for-your-order' THEN 1 ELSE 0 END AS thankyou_page
+    FROM website_sessions ws
+    JOIN website_pageviews wp
+        ON ws.website_session_id = wp.website_session_id
+    WHERE wp.created_at >= '2023-06-24'
+      AND wp.created_at < '2023-09-10'
+      AND wp.pageview_url IN (
+            '/billing',
+            '/billing-2',
+            '/thank-you-for-your-order'
+      )
+) AS pageview_level
+GROUP BY website_session_id;
+
+
