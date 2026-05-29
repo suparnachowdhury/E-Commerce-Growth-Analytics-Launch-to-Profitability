@@ -20,3 +20,12 @@ AND utm_source IN ('g_search','b_search')
 GROUP BY
 	YEAR(created_at),
     WEEK(created_at);
+    
+/** 
+Marketing Director: 
+I’d like to understand bsearch's audience — compare the share of mobile traffic 
+between bsearch and gsearch since September 3rd. 
+
+Are these different audiences?
+
+**/
