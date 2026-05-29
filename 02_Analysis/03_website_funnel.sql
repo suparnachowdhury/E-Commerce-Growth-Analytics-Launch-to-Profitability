@@ -57,11 +57,19 @@ New Website Manager:
     Pull the bounce rate for that page — I want sessions, bounced sessions, 
     and bounce rate % so we can see if it's doing its job."
 */
-SELECT
-	*
+CREATE TEMPORARY TABLE first_pv_per_session
+SELECT 
+		website_session_id,
+        MIN(website_pageview_id) as first_pv
 FROM website_pageviews
 WHERE created_at < '2023-03-21'
+GROUP BY 
+		website_session_id;
+        
+SELECT
+        
 
+		pv.pageview_url;
 
 /*
 We A/B tested a new landing page (/lander-1) against /home for paid non-brand traffic. Compare bounce rates for both groups during the test window to see which page performed better.
