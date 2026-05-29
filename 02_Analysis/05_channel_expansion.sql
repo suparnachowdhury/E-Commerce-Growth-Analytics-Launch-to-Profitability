@@ -29,3 +29,14 @@ between bsearch and gsearch since September 3rd.
 Are these different audiences?
 
 **/
+SELECT
+utm_source,
+COUNT(DISTINCT website_session_id) AS sessions, 
+COUNT(DISTINCT CASE WHEN  device_type = 'mobile' THEN website_session_id ELSE 0 END) as mobile_sessions,
+COUNT(DISTINCT CASE WHEN  device_type = 'mobile' THEN website_session_id ELSE 0 END)* 100.0/
+ COUNT(DISTINCT website_session_id)as pct_mobile 
+FROM website_sessions
+WHERE created_at >= '2023-09-03' AND 
+created_at < '2023-12-15' AND
+utm_campaign = 'nonbrand'
+GROUP BY utm_source;
