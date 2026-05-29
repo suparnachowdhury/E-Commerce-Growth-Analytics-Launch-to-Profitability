@@ -97,18 +97,20 @@ where pageview_url= '/billing-2';
 select 
 website_session_id,
 max(billing_page) as billing_made_it,
-max(billing1_page) as billing1_made_it,
+max(billing2_page) as billing2_made_it,
 max(thankyou_page) as thankyou_made_it
 from (
 select 
 	  ws.website_session_id,
       wp.pageview_url,
       case when wp.pageview_url = '/billing' then 1 else 0 end as billing_page,
-      case when wp.pageview_url = '/billing-2' then 1 else 0 end as shipping_page,
+      case when wp.pageview_url = '/billing-2' then 1 else 0 end as billing2_page,
       case when wp.pageview_url = '/thank-you-for-your-order' then 1 else 0 end as thankyou_page
 from website_sessions ws
 join website_pageviews wp
 on ws.website_session_id = wp.website_session_id
 where  wp.created_at  >= '2023-06-24'
 and wp.created_at < '2023-09-10'
-and wp.pageview_url in ('/home-v2','/billing','/billing-2','/thank-you-for-your-order') ;
+and wp.pageview_url in ('/home-v2','/billing','/billing-2','/thank-you-for-your-order')
+) as pageview_level
+group by website_session_id;
