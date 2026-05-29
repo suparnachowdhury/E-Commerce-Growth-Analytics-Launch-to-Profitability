@@ -56,13 +56,13 @@ Mar 7, 2023 g_search nonbrand desktop bid increase · Analysis window: Feb 5 →
 */
 
 SELECT
-    MIN(DATE(created_at))                                              AS week_start_date,
+    MIN(DATE(created_at))  AS week_start_date,
     COUNT(DISTINCT CASE WHEN device_type = 'desktop'
-        THEN website_session_id END)                                   AS desktop_sessions,
+        THEN website_session_id END)  AS desktop_sessions,
     COUNT(DISTINCT CASE WHEN device_type = 'mobile'
-        THEN website_session_id END)                                   AS mobile_sessions
+        THEN website_session_id END)  AS mobile_sessions
 FROM   website_sessions
-WHERE  created_at  < '2023-04-16'           -- analysis window: Feb 5 → Apr 16, 2023
+WHERE  created_at  < '2023-04-16'
   AND  created_at >= '2023-02-05'
   AND  utm_source   = 'g_search'
   AND  utm_campaign = 'nonbrand'
@@ -84,19 +84,19 @@ Mar 7, 2023 bid change · Analysis window: Feb 5 → Apr 16, 2023
 */
 
 SELECT
-    MIN(DATE(w.created_at))                                            AS week_start_date,
+    MIN(DATE(w.created_at)) AS week_start_date,
     COUNT(DISTINCT CASE WHEN device_type = 'desktop'
-        THEN w.website_session_id END)                                 AS desktop_sessions,
+        THEN w.website_session_id END)  AS desktop_sessions,
     COUNT(DISTINCT CASE WHEN device_type = 'desktop'
         THEN o.website_session_id END) * 100.0
         / COUNT(DISTINCT CASE WHEN device_type = 'desktop'
-        THEN w.website_session_id END)                                 AS desktop_conv_rate,
+        THEN w.website_session_id END)  AS desktop_conv_rate,
     COUNT(DISTINCT CASE WHEN device_type = 'mobile'
-        THEN w.website_session_id END)                                 AS mobile_sessions,
+        THEN w.website_session_id END) AS mobile_sessions,
     COUNT(DISTINCT CASE WHEN device_type = 'mobile'
         THEN o.website_session_id END) * 100.0
         / COUNT(DISTINCT CASE WHEN device_type = 'mobile'
-        THEN w.website_session_id END)                                 AS mobile_conv_rate
+        THEN w.website_session_id END)  AS mobile_conv_rate
 FROM   website_sessions w
 LEFT JOIN orders o
     ON w.website_session_id = o.website_session_id
