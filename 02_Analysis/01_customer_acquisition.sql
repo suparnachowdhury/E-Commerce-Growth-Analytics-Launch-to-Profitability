@@ -40,7 +40,7 @@ Finding:
     
     
 /*
-Date: February 2, 2023
+Date: January 24, 2023
 Subject: Are paid clicks converting into sales?
 
 Head of Marketing: 
@@ -51,7 +51,7 @@ Head of Marketing:
     
     We need at least 3.5% to be profitable at our current CPC."
     
-January 1, 2023 Website launch · Analysis window: Jan 1 -> Feb 1, 2023
+January 1, 2023 Website launch · Analysis window: Jan 1 -> Jan 23, 2023
 */
 
 SELECT
@@ -61,13 +61,13 @@ SELECT
 FROM website_sessions ws 
 LEFT JOIN orders o 
 ON ws.website_session_id = o.website_session_id
-WHERE ws.created_at < '2023-02-02'
+WHERE ws.created_at < '2023-01-24'
   AND ws.utm_source = 'g_search'
   AND ws.utm_campaign = 'nonbrand';
   
 /*
 Alert: 
-	- At 2.86% CVR, the business is spending on clicks that aren't converting enough 
+	- At 2.98% CVR, the business is spending on clicks that aren't converting enough 
 	  to be profitable. 
       
 	- This flags a critical need to either reduce CPC bids, improve the landing page, 
