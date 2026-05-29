@@ -190,43 +190,7 @@ AND ws.utm_source = 'gsearch'
 GROUP BY
 		pv.website_session_id;
         
-        
-SELECT * FROM session_w_min_pv_id_view_count LIMIT 5;
-    
--- STEP 3: Filtering out only the home and lander-1 landing pages
-    
-CREATE TEMPORARY TABLE sessions_w_landing_page_created_at
-SELECT 
-		fs.*,
-        pv.created_at,
-        pv.pageview_url as landing_page
-FROM session_w_min_pv_id_view_count fs
-LEFT JOIN   website_pageviews pv
-ON pv.website_pageview_id = fs.first_pv;
 
-SELECT * FROM sessions_w_landing_page_created_at LIMIT 5;
--- STEP 4: then we count pageviews per session limiting to bounced sessions
-
-
-         
-
--- Final output
-
-SELECT 
-	 YEARWEEK(created_at) AS year_week,
-     MIN(DATE(created_at)) AS week_start_date,
-     COUNT(DISTINCT website_session_id) AS total_sessions,
-     COUNT(DISTINCT CASE WHEN pageview_counts = 1 
-				THEN website_session_id ELSE NULL END ) AS bounced_sessions,
-	COUNT(DISTINCT CASE WHEN pageview_counts = 1 
-				THEN website_session_id ELSE NULL END )/
-                COUNT(DISTINCT website_session_id)*100.0 AS bounced_rate,
-     COUNT(CASE WHEN landing_page = '/home' 
-				THEN website_session_id ELSE NULL END ) AS home_sessions,
-	COUNT(CASE WHEN landing_page = '/lander-1' 
-				THEN website_session_id ELSE NULL END ) AS lander1_sessions
-FROM sessions_w_landing_page_created_at
-GROUP BY YEARWEEK(created_at);
 
 /*
 Build a full conversion funnel from /home-v2 through to the thank-you page using data 
