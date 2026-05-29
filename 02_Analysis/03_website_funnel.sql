@@ -190,6 +190,20 @@ AND ws.utm_source = 'g_search'
 GROUP BY
 		pv.website_session_id;
         
+-- STEP 3: Filtering out only the home and lander-1 landing pages
+    
+CREATE TEMPORARY TABLE sessions_w_landing_page_created_at
+SELECT 
+		fs.*,
+        pv.created_at,
+        pv.pageview_url as landing_page
+FROM session_w_min_pv_id_view_count fs
+LEFT JOIN   website_pageviews pv
+ON pv.website_pageview_id = fs.first_pv;
+
+-- SELECT * FROM sessions_w_landing_page_created_at LIMIT 5;
+-- STEP 4: then we count pageviews per session limiting to bounced sessions
+        
 
 
 /*
