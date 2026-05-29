@@ -74,7 +74,7 @@ ORDER BY  week_start_date;
 
 /*
 Date: March 7, 2023
-Subject: Device-level CVR analysis before the desktop bid increase
+Subject: Device-level CVR analysis due to  the desktop bid increase
 Head of Marketing:
 	"We improved desktop bids on March 7th after seeing desktop CVR was strong.
 	Show me weekly session trends for desktop vs mobile separately,
