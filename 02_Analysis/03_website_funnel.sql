@@ -58,3 +58,20 @@ wp.created_at < '2023-06-14'
 order by ws.website_session_id,
       wp.created_at) as pageview_level
 group by website_session_id;
+
+
+select
+ count(distinct case when product_made_it = 1 then website_session_id else null end)/ 
+ count(distinct website_session_id) as products_click_rate, 
+ count(distinct case when picture_frame_made_it = 1 then website_session_id else null end)/
+  count(distinct case when product_made_it = 1 then website_session_id else null end)as products_click_rate,
+ count(distinct case when cart_made_it = 1 then website_session_id else null end)/
+ count(distinct case when picture_frame_made_it = 1 then website_session_id else null end)as mrfuzzy_click_rate,
+ count(distinct case when shipping_made_it = 1 then website_session_id else null end) /
+ count(distinct case when cart_made_it = 1 then website_session_id else null end)as carts_click_rate,
+ count(distinct case when billing_made_it = 1 then website_session_id else null end) /
+ count(distinct case when shipping_made_it = 1 then website_session_id else null end) as shipping_click_rate,
+ count(distinct case when thankyou_made_it = 1 then website_session_id else null end)/
+  count(distinct case when billing_made_it = 1 then website_session_id else null end)
+ as billing_click_rate
+from session_level_made_it_flags;
