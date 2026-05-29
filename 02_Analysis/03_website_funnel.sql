@@ -121,3 +121,24 @@ FROM (
 GROUP BY website_session_id;
 
 
+SELECT
+    CASE
+        WHEN billing2_made_it = 1 THEN '/billing-2'
+        ELSE '/billing'
+    END AS billing_version,
+    
+    COUNT(*) AS sessions,
+    
+    SUM(thankyou_made_it) AS orders,
+    
+    ROUND(
+        SUM(thankyou_made_it) * 100.0 / COUNT(*),
+        2
+    ) AS conversion_rate_pct
+
+FROM billing_test_sessions
+WHERE billing_made_it = 1
+   OR billing2_made_it = 1
+GROUP BY billing_version;
+
+
