@@ -186,7 +186,7 @@ ON pv.website_session_id = ws.website_session_id
 WHERE pv.created_at >= '2023-04-01'
 AND pv.created_at <'2023-06-15'
 AND ws.utm_campaign = 'nonbrand'
-AND ws.utm_source = 'gsearch'
+AND ws.utm_source = 'g_search'
 GROUP BY
 		pv.website_session_id;
         
