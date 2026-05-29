@@ -78,6 +78,11 @@ WHERE pv.created_at < '2023-03-21'
 AND pv.pageview_url = '/home';
 
 /*
-We A/B tested a new landing page (/lander-1) against /home for paid non-brand traffic. Compare bounce rates for both groups during the test window to see which page performed better.
+We A/B tested a new landing page (/lander-1) against /home for paid non-brand traffic. 
+
+Compare bounce rates for both groups during the test window to see which page performed better.
+*/
+
+/*
 Build a full conversion funnel from /lander-1 through to the thank-you page using data from August 5th onward. I want to see where we're losing people at each step so we know what to fix next.
 */
