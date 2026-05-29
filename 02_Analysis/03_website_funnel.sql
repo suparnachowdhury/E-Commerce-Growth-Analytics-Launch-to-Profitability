@@ -183,8 +183,8 @@ SELECT   DISTINCT utm_content FROM website_sessions LIMIT 5;
 FROM website_pageviews pv
 INNER JOIN website_sessions ws 
 ON pv.website_session_id = ws.website_session_id
-WHERE pv.created_at >= '2023-04-01'
-AND pv.created_at <'2023-06-15'
+WHERE pv.created_at >= '2023-03-18'
+AND pv.created_at <'2023-05-31'
 AND ws.utm_campaign = 'nonbrand'
 AND ws.utm_source = 'g_search'
 GROUP BY
@@ -217,7 +217,7 @@ SELECT
                 COUNT(DISTINCT website_session_id)*100.0 AS bounced_rate,
      COUNT(CASE WHEN landing_page = '/home' 
 				THEN website_session_id ELSE NULL END ) AS home_sessions,
-	COUNT(CASE WHEN landing_page = '/lander-1' 
+	COUNT(CASE WHEN landing_page = '/home-v2' 
 				THEN website_session_id ELSE NULL END ) AS lander1_sessions
 FROM sessions_w_landing_page_created_at
 GROUP BY YEARWEEK(created_at);
